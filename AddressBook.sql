@@ -31,3 +31,7 @@ update Address_Book_Table set Phonenum=9989999899 where Address='tidel park';
 update Address_Book_Table set EmailId='c.k@gmail.com' where FirstName='chandu';
 
 select * from Address_Book_Table;
+
+--------UC5---------
+
+delete from Address_Book_Table where FirstName='manoj' and LastName='kumar';
