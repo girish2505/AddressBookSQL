@@ -23,7 +23,6 @@ EmailId varchar(100)
 Insert into Address_Book_Table values('girish','guptha','bazzar street','nellore','andhra',524406,7660094458,'v.g@gmail.com'),
 ('manoj','Kumar','tidel park','chennai','tamilNadu',600119,9989912345,'mm@gmail.com');
 Insert into Address_Book_Table values('chandu','kanth','nandhalur','kadapa','andhra',523412,9848022338,'ck@gmail.com');
-
 -------------UC4--------------
 
 update Address_Book_Table set Phonenum=9989999899 where Address='tidel park';
@@ -49,3 +48,18 @@ Select Count(*) As Count,StateName,City from Address_Book_Table group by StateNa
 ---------UC8------------
 
 select FirstName,LastName from Address_Book_Table where StateName='andhra' order by FirstName;
+
+----------UC9---------------
+alter table Address_Book_Table
+add AddressBookName varchar(50),
+RelationType varchar(50)
+
+
+update Address_Book_Table
+set AddressBookName='Friend',RelationType='Friend'
+where FirstName='girish' 
+
+
+update Address_Book_Table
+set AddressBookName='Cousin',RelationType='Family'
+where ZipCode=523412;
