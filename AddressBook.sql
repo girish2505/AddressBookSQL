@@ -41,3 +41,6 @@ delete from Address_Book_Table where FirstName='manoj' and LastName='kumar';
 Select FirstName,LastName from Address_Book_Table where City='nellore' or StateName='andhra';
 
 Select FirstName,LastName from Address_Book_Table where City='kadapa';
+
+-----------UC7------------
+Select Count(*) As Count,StateName,City from Address_Book_Table group by StateName,City;
