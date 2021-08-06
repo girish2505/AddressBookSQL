@@ -63,3 +63,6 @@ where FirstName='girish'
 update Address_Book_Table
 set AddressBookName='Cousin',RelationType='Family'
 where ZipCode=523412;
+
+---------UC10---->Count of persons based on realtion type-----
+Select count(*)as CountType, RelationType  from Address_Book_Table group by RelationType;
