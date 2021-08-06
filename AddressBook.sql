@@ -64,5 +64,70 @@ update Address_Book_Table
 set AddressBookName='Cousin',RelationType='Family'
 where ZipCode=523412;
 
----------UC10---->Count of persons based on realtion type-----
+---------UC10----
 Select count(*)as CountType, RelationType  from Address_Book_Table group by RelationType;
+
+---------UC11-----------
+
+create table Address_Book(
+AddressBookID int identity(1,1) primary key,
+AddressBookName varchar(100)
+)
+---Insert the values in Address_Book
+Insert into Address_Book values ('crazy'),('dumb');
+---Retrieve the data
+select * from Address_Book;
+--Create Contact_Person
+create table Contact_Person(
+AddressBook_ID int,
+ContactID int identity(1,1) primary key,
+FirstName varchar(100),
+LastName varchar(100),
+Address varchar(250),
+City varchar(100),
+StateName varchar(100),
+ZipCode BigInt,
+PhoneNum BigInt,
+EmailId varchar(200),
+foreign key (AddressBook_ID) references Address_Book(AddressBookID));
+--Insert the values 
+Insert into Contact_Person values
+(1,'eswar','yasash','nizampet','hyderabad','telangana',543215,7688876888,'eswar@gmail.com'),
+(2,'madhu','varri','mg road','vijayawada',' andhra',532678,9182501714,'madhu.22@gmail.com'),
+(2,'manoj','Kumar','tidel park','chennai','tamilNadu',600119,9989912345,'mm@gmail.com'),
+(1,'girish','guptha','bazzar street','nellore','andhra',524406,7660094458,'v.g@gmail.com');
+--Retrieve the data
+select * from Contact_Person;
+---Create contact_type table
+create table Contact_Type
+(ContactTypeID int identity(1,1) primary key,
+ContactTypeName varchar(100)
+)
+---Insert the values in contat_type
+Insert into Contact_Type values
+('Family'),('Friends');
+--Retrieve the data
+Select * from Contact_Type;
+---Create relation type table
+create Table Relation_Type(
+ContactType_ID int,
+Contact_ID int,
+foreign key (ContactType_ID) references Contact_Type(ContactTypeID),
+foreign key (Contact_ID) references Contact_Person(ContactID)
+)
+---Insert the values in relation_type
+insert into Relation_Type values
+(1,1),
+(2,2),
+(1,3),
+(1,4)
+
+--Retrieve the data
+Select * from Relation_Type;
+------- Create Contact for both Family and Friends Type------
+--------UC11--------
+select AddressBookName,FirstName,LastName,Address,City,StateName,ZipCode,PhoneNum,EmailId,ContactTypeName
+from Address_Book 
+Full JOIN Contact_Person on Address_Book.AddressBookID=Contact_Person.AddressBook_ID 
+Full JOIN Relation_Type on Relation_Type.Contact_ID=Contact_Person.ContactID
+Full JOIN Contact_Type on Relation_Type.ContactType_ID=Contact_Type.ContactTypeID
